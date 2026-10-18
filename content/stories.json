@@ -1,0 +1,63 @@
+{
+  "kurs": {
+    "title": "Hallo, wir sind ein Team!",
+    "bn_title": "হ্যালো, আমরা একটা টিম!",
+    "sentences": [
+      ["Guten Morgen! Wie geht es dir? – Danke, gut!", "Good morning! How are you? – Good, thanks!", "শুভ সকাল! কেমন আছ? – ধন্যবাদ, ভালো!"],
+      ["Ich heiße Robin. Ich komme aus Bangladesch.", "My name is Robin. I come from Bangladesh.", "আমার নাম রবিন। আমি বাংলাদেশ থেকে এসেছি।"],
+      ["Ich wohne in Dhaka und lerne Deutsch.", "I live in Dhaka and I am learning German.", "আমি ঢাকায় থাকি আর জার্মান শিখছি।"],
+      ["Das ist Mina. Sie ist meine Freundin.", "This is Mina. She is my friend.", "এ হলো মিনা। সে আমার বন্ধু।"],
+      ["Und das ist Tom. Er kommt aus Deutschland.", "And this is Tom. He comes from Germany.", "আর এ হলো টম। সে জার্মানি থেকে এসেছে।"],
+      ["Wir sind sieben. Wir sind ein Team!", "We are seven. We are a team!", "আমরা সাতজন। আমরা একটা টিম!"],
+      ["Ihr lernt zusammen? – Ja, wir lernen jeden Tag zusammen.", "You learn together? – Yes, we learn together every day.", "তোমরা একসাথে শেখো? – হ্যাঁ, আমরা প্রতিদিন একসাথে শিখি।"],
+      ["Tom fragt: „Wie alt bist du?“ – „Ich bin dreißig Jahre alt.“", "Tom asks: “How old are you?” – “I am thirty years old.”", "টম জিজ্ঞেস করে: „তোমার বয়স কত?“ – „আমার বয়স ত্রিশ বছর।“"],
+      ["Entschuldigung, wie bitte? Noch einmal, bitte!", "Sorry, pardon? Once more, please!", "দুঃখিত, কী বললে? আরেকবার বলো, প্লিজ!"],
+      ["Danke schön! – Bitte schön!", "Thank you very much! – You're welcome!", "অনেক ধন্যবাদ! – স্বাগতম!"],
+      ["Tschüss! Bis morgen!", "Bye! See you tomorrow!", "বিদায়! কাল দেখা হবে!"]
+    ]
+  },
+  "k1": {
+    "title": "Robin und der singende Koffer",
+    "bn_title": "রবিন আর গান-গাওয়া স্যুটকেস",
+    "sentences": [
+      ["Robin kommt aus Bangladesch und wohnt jetzt in Deutschland.", "Robin comes from Bangladesh and now lives in Germany.", "রবিন বাংলাদেশ থেকে এসেছে, এখন জার্মানিতে থাকে।"],
+      ["Am Montag fährt er auf der Autobahn zum Kurs.", "On Monday he drives on the motorway to the course.", "সোমবার সে হাইওয়ে দিয়ে কোর্সে যায়।"],
+      ["Er hat einen Koffer. Der Koffer ist sehr groß und singt sehr laut!", "He has a suitcase. The suitcase is very big and sings very loudly!", "তার একটা স্যুটকেস আছে। স্যুটকেসটা অনেক বড় আর খুব জোরে গান গায়!"],
+      ["Im Kursraum sind zwölf Leute aus zwölf Ländern.", "In the classroom there are twelve people from twelve countries.", "ক্লাসরুমে বারোটা দেশের বারোজন মানুষ।"],
+      ["Die Frau aus Japan lächelt, der Mann aus Brasilien tanzt, und der Herr aus Polen fotografiert alles.", "The woman from Japan smiles, the man from Brazil dances, and the gentleman from Poland takes photos of everything.", "জাপানের মহিলা হাসে, ব্রাজিলের লোকটা নাচে, আর পোল্যান্ডের ভদ্রলোক সবকিছুর ছবি তোলে।"],
+      ["Der Lehrer schreibt das Alphabet an die Tafel: A, B, C …", "The teacher writes the alphabet on the board: A, B, C …", "শিক্ষক বোর্ডে বর্ণমালা লেখেন: A, B, C …"],
+      ["Dann geht der Koffer auf!", "Then the suitcase opens!", "তারপর স্যুটকেসটা খুলে যায়!"],
+      ["Im Koffer sind Spaghetti, zwanzig Würstchen, ein Handtuch und eine Flasche.", "In the suitcase there are spaghetti, twenty little sausages, a towel and a bottle.", "স্যুটকেসে আছে স্প্যাগেটি, বিশটা সসেজ, একটা তোয়ালে আর একটা বোতল।"],
+      ["„Was ist das?“, fragt der Lehrer. „Das sind meine Dinge“, sagt Robin leise.", "“What is that?” asks the teacher. “Those are my things,” says Robin quietly.", "„এটা কী?“ শিক্ষক জিজ্ঞেস করেন। „এগুলো আমার জিনিস“, রবিন আস্তে বলে।"],
+      ["„Wie heißen Sie? Woher kommen Sie? Welche Sprachen sprechen Sie?“", "“What is your name? Where do you come from? Which languages do you speak?”", "„আপনার নাম কী? আপনি কোথা থেকে এসেছেন? কোন কোন ভাষা বলেন?“"],
+      ["Robin antwortet langsam: „Ich heiße Robin. Ich spreche Bengali, Englisch und ein bisschen Deutsch.“", "Robin answers slowly: “My name is Robin. I speak Bengali, English and a little German.”", "রবিন ধীরে উত্তর দেয়: „আমার নাম রবিন। আমি বাংলা, ইংরেজি আর একটু জার্মান বলি।“"],
+      ["Seine Handynummer sagt er nicht – er singt sie: null, eins, sieben, sieben …", "He doesn't say his mobile number – he sings it: zero, one, seven, seven …", "সে মোবাইল নম্বর বলে না – গেয়ে শোনায়: শূন্য, এক, সাত, সাত …"],
+      ["Am Wochenende gehen alle zusammen ins Kino, dann ins Museum und danach ins Schwimmbad.", "At the weekend everyone goes to the cinema together, then to the museum and after that to the swimming pool.", "সপ্তাহান্তে সবাই একসাথে সিনেমায় যায়, তারপর জাদুঘরে, তারপর সুইমিং পুলে।"],
+      ["Im Schwimmbad schwimmt der Koffer mit!", "In the swimming pool the suitcase swims along too!", "সুইমিং পুলে স্যুটকেসটাও সাঁতার কাটে!"],
+      ["Am Ende sagt der Lehrer: „Super! Ihr lernt wirklich gut.“", "At the end the teacher says: “Great! You really learn well.”", "শেষে শিক্ষক বলেন: „দারুণ! তোমরা সত্যিই ভালো শিখছ।“"],
+      ["Robin ist sehr glücklich. „Tschüss! Bis morgen!“", "Robin is very happy. “Bye! See you tomorrow!”", "রবিন খুব খুশি। „বিদায়! কাল দেখা হবে!“"]
+    ]
+  },
+  "k2": {
+    "title": "Ein Schlüssel, viele Berufe",
+    "bn_title": "একটা চাবি, অনেক পেশা",
+    "sentences": [
+      ["Robin hat viele Freunde, und jeder hat einen anderen Beruf.", "Robin has many friends, and each one has a different job.", "রবিনের অনেক বন্ধু, আর প্রত্যেকের পেশা আলাদা।"],
+      ["Am Montag um sieben Uhr arbeitet Mina schon im Krankenhaus. Sie ist Ärztin.", "On Monday at seven o'clock Mina is already working in the hospital. She is a doctor.", "সোমবার সকাল সাতটায় মিনা ইতিমধ্যে হাসপাতালে কাজ করছে। সে ডাক্তার।"],
+      ["Ihr Patient ist Tom, der Taxifahrer. Er ist krank.", "Her patient is Tom, the taxi driver. He is sick.", "তার রোগী টম, ট্যাক্সিচালক। সে অসুস্থ।"],
+      ["Mina gibt Tom eine Tablette. „Eine Spritze? Nein, danke!“, sagt Tom.", "Mina gives Tom a pill. “An injection? No, thanks!” says Tom.", "মিনা টমকে একটা ট্যাবলেট দেয়। „ইনজেকশন? না, ধন্যবাদ!“ টম বলে।"],
+      ["Danach fährt Tom die Friseurin Lisa zu ihrem Geschäft.", "After that Tom drives Lisa the hairdresser to her shop.", "তারপর টম নাপিত লিসাকে তার দোকানে নিয়ে যায়।"],
+      ["Aber Lisa sucht und sucht – sie hat ihren Schlüssel verloren!", "But Lisa searches and searches – she has lost her key!", "কিন্তু লিসা খোঁজে আর খোঁজে – সে তার চাবি হারিয়ে ফেলেছে!"],
+      ["Ein Polizist kommt und hilft. Der Schlüssel ist im Taxi, unter einer Zeitung.", "A police officer comes and helps. The key is in the taxi, under a newspaper.", "একজন পুলিশ এসে সাহায্য করে। চাবিটা ট্যাক্সিতে, একটা খবরের কাগজের নিচে।"],
+      ["Im Geschäft gibt es kein Licht. Der Elektriker repariert es in zehn Minuten.", "There is no light in the shop. The electrician repairs it in ten minutes.", "দোকানে কোনো আলো নেই। ইলেকট্রিশিয়ান দশ মিনিটে ঠিক করে দেয়।"],
+      ["Am Nachmittag sitzen alle im Restaurant. Der Kellner bringt Wasser, Kaffee und Spaghetti.", "In the afternoon everyone sits in the restaurant. The waiter brings water, coffee and spaghetti.", "বিকেলে সবাই রেস্টুরেন্টে বসে। ওয়েটার পানি, কফি আর স্প্যাগেটি আনে।"],
+      ["Dann kommt die Rechnung. Tom hat heute Geld, und der Kellner bekommt ein großes Trinkgeld.", "Then the bill comes. Tom has money today, and the waiter gets a big tip.", "তারপর বিল আসে। আজ টমের কাছে টাকা আছে, আর ওয়েটার বড় টিপস পায়।"],
+      ["Eine Journalistin sitzt auch da. Sie schreibt einen Artikel für die Zeitung: „Ein Tag, viele Berufe“.", "A journalist is sitting there too. She writes an article for the newspaper: “One day, many jobs”.", "একজন সাংবাদিকও সেখানে বসে আছে। সে কাগজের জন্য লেখে: „এক দিন, অনেক পেশা“।"],
+      ["Am Abend gehen alle in den Sprachenclub. Dort machen sie eine Umfrage: „Was machst du gern in deiner Freizeit?“", "In the evening everyone goes to the language club. There they do a survey: “What do you like doing in your free time?”", "সন্ধ্যায় সবাই ভাষা ক্লাবে যায়। সেখানে তারা জরিপ করে: „অবসরে তুমি কী করতে ভালোবাসো?“"],
+      ["Mina tanzt gern, Tom spielt lieber Fußball, und Lisa geht oft schwimmen.", "Mina likes dancing, Tom prefers playing football, and Lisa often goes swimming.", "মিনা নাচতে ভালোবাসে, টম ফুটবল খেলতে বেশি পছন্দ করে, আর লিসা প্রায়ই সাঁতার কাটতে যায়।"],
+      ["Robin nimmt drei Stifte: blau für der, rot für die, grün für das.", "Robin takes three pens: blue for der, red for die, green for das.", "রবিন তিনটা কলম নেয়: der-এর জন্য নীল, die-এর জন্য লাল, das-এর জন্য সবুজ।"],
+      ["Er schreibt jedes neue Wort auf eine Lernkarte: der Schlüssel blau, die Rechnung rot, das Geld grün.", "He writes every new word on a flashcard: der Schlüssel in blue, die Rechnung in red, das Geld in green.", "সে প্রতিটা নতুন শব্দ একটা কার্ডে লেখে: der Schlüssel নীল, die Rechnung লাল, das Geld সবুজ।"],
+      ["Am Wochenende hat er frei. Er liest seine Lernkarten jeden Tag – und merkt sich alles!", "At the weekend he has time off. He reads his flashcards every day – and remembers everything!", "সপ্তাহান্তে তার ছুটি। সে প্রতিদিন কার্ডগুলো পড়ে – আর সব মনে রাখে!"]
+    ]
+  }
+}

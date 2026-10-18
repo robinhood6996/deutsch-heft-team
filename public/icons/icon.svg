@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#2446a8"/>
+  <rect x="120" y="96" width="290" height="330" rx="28" fill="#f7f3ea"/>
+  <g stroke="#c9d3ea" stroke-width="8"><line x1="150" y1="200" x2="380" y2="200"/><line x1="150" y1="260" x2="380" y2="260"/><line x1="150" y1="320" x2="380" y2="320"/></g>
+  <rect x="96" y="96" width="44" height="110" fill="#1a1a1a"/>
+  <rect x="96" y="206" width="44" height="110" fill="#dd0000"/>
+  <rect x="96" y="316" width="44" height="110" fill="#ffce00"/>
+  <text x="270" y="300" font-family="Georgia, serif" font-size="190" font-weight="700" fill="#2446a8" text-anchor="middle">D</text>
+</svg>
