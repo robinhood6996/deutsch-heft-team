@@ -1,7 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Lesson, MissionProgress, Sentence, TodayMission, Word } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { ReviewSession } from "@/components/ReviewSession";
@@ -41,7 +42,7 @@ export function MissionRunner({
   sentences: Sentence[];
   pool: Word[];
 }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [progress, setProgress] = useState<MissionProgress>(today.progress);
   const [step, setStep] = useState<Step | "done">(firstOpen(today.progress));
   const [error, setError] = useState("");
@@ -103,9 +104,9 @@ export function MissionRunner({
           ) : (
             <div className="card">
               <p>No cards are due today. Nice! · <span className="bn">আজ রিভিশনের কিছু নেই।</span></p>
-              <button className="btn mt-3" onClick={() => complete("review")}>
+              <LoadingButton className="btn mt-3" loadingText="Speichern …" onClick={() => complete("review")}>
                 Weiter →
-              </button>
+              </LoadingButton>
             </div>
           )}
         </section>
@@ -119,9 +120,9 @@ export function MissionRunner({
           ) : (
             <div className="card">
               <p>You have already learned every word here. The leader can pick the next lesson. · <span className="bn">এখানকার সব শব্দ শেখা শেষ।</span></p>
-              <button className="btn mt-3" onClick={() => complete("learn")}>
+              <LoadingButton className="btn mt-3" loadingText="Speichern …" onClick={() => complete("learn")}>
                 Weiter →
-              </button>
+              </LoadingButton>
             </div>
           )}
         </section>
@@ -140,16 +141,17 @@ export function MissionRunner({
             <p className="card">This lesson has no text.</p>
           )}
           <div className="sticky bottom-20 mt-4 flex justify-end lg:bottom-4">
-            <button
+            <LoadingButton
               className="btn-gold shadow-lg"
               disabled={!readUnlocked && sentences.length > 0}
+              loadingText="Speichern …"
               onClick={async () => {
                 if (lesson) await supabaseBrowser().rpc("mark_read", { p_lesson: lesson.id });
-                complete("read");
+                await complete("read");
               }}
             >
               {readUnlocked || !sentences.length ? "Ich habe laut gelesen ✓" : `🔒 Play the text or speak 3 sentences (${reading.spoken}/3)`}
-            </button>
+            </LoadingButton>
           </div>
         </section>
       )}

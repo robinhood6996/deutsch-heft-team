@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Chapter, Member, TeamOverview } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 export function TeamSettings({ team, chapters, members }: { team: TeamOverview["team"]; chapters: Chapter[]; members: Member[] }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [name, setName] = useState(team.name);
   const [focus, setFocus] = useState(team.focus_chapter_id ?? "");
   const [goal, setGoal] = useState(team.weekly_goal_words);
@@ -58,9 +59,9 @@ export function TeamSettings({ team, chapters, members }: { team: TeamOverview["
             <input type="number" className="input" min={0} value={goal} onChange={(e) => setGoal(Number(e.target.value) || 0)} />
           </label>
           <div className="flex items-center gap-3">
-            <button className="btn" onClick={save}>
+            <LoadingButton className="btn" loading={router.pending} loadingText="Speichern …" onClick={save}>
               Speichern
-            </button>
+            </LoadingButton>
             {msg && <span className="text-sm">{msg}</span>}
           </div>
         </div>
@@ -73,20 +74,20 @@ export function TeamSettings({ team, chapters, members }: { team: TeamOverview["
                   {m.avatar_emoji} {m.display_name} <span className="text-muted">({m.role})</span>
                 </span>
                 {m.role === "member" ? (
-                  <button className="btn-ghost px-2 py-1 text-xs" onClick={() => role(m.user_id, "leader")}>
+                  <LoadingButton className="btn-ghost px-2 py-1 text-xs" onClick={() => role(m.user_id, "leader")}>
                     Make leader
-                  </button>
+                  </LoadingButton>
                 ) : (
                   members.filter((x) => x.role === "leader").length > 1 && (
-                    <button className="btn-ghost px-2 py-1 text-xs" onClick={() => role(m.user_id, "member")}>
+                    <LoadingButton className="btn-ghost px-2 py-1 text-xs" onClick={() => role(m.user_id, "member")}>
                       Make member
-                    </button>
+                    </LoadingButton>
                   )
                 )}
                 {m.role === "member" && (
-                  <button className="btn-ghost px-2 py-1 text-xs text-red" onClick={() => remove(m.user_id, m.display_name)}>
+                  <LoadingButton className="btn-ghost px-2 py-1 text-xs text-red" onClick={() => remove(m.user_id, m.display_name)}>
                     Remove
-                  </button>
+                  </LoadingButton>
                 )}
               </li>
             ))}

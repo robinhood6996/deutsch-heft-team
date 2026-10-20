@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { LoadingButton } from "@/components/LoadingButton";
+import { Spinner } from "@/components/Spinner";
 
 const b64ToBytes = (b64: string) => {
   const pad = "=".repeat((4 - (b64.length % 4)) % 4);
@@ -55,18 +57,18 @@ export function PushToggle({ userId }: { userId: string }) {
         Add to Home Screen).
       </p>
       <div className="mt-2">
-        {state === "loading" && <span className="text-sm text-muted">…</span>}
+        {state === "loading" && <Spinner className="h-5 w-5 text-muted" />}
         {state === "unsupported" && <span className="text-sm text-muted">This browser does not support notifications{key ? "" : " (VAPID key not set)"}.</span>}
         {state === "denied" && <span className="text-sm text-red">Notifications are blocked in your browser settings.</span>}
         {state === "off" && (
-          <button className="btn" onClick={enable}>
+          <LoadingButton className="btn" loadingText="Einschalten …" onClick={enable}>
             Einschalten
-          </button>
+          </LoadingButton>
         )}
         {state === "on" && (
-          <button className="btn-ghost" onClick={disable}>
+          <LoadingButton className="btn-ghost" loadingText="Ausschalten …" onClick={disable}>
             ✓ On · Ausschalten
-          </button>
+          </LoadingButton>
         )}
         {msg && <p className="mt-1 text-sm">{msg}</p>}
       </div>

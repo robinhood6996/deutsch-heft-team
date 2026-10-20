@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { LoadingButton } from "./LoadingButton";
 
 export function NudgeBanner({ nudges }: { nudges: { id: number; message: string; from: string }[] }) {
   const [open, setOpen] = useState(nudges.length > 0);
@@ -21,7 +22,7 @@ export function NudgeBanner({ nudges }: { nudges: { id: number; message: string;
           ))}
         <p className="mt-1 text-sm text-muted">Start your mission within an hour and you both get +10 XP.</p>
       </div>
-      <button
+      <LoadingButton
         className="btn-ghost px-3 py-1 text-sm"
         onClick={async () => {
           await supabaseBrowser().rpc("mark_nudges_seen");
@@ -29,7 +30,7 @@ export function NudgeBanner({ nudges }: { nudges: { id: number; message: string;
         }}
       >
         OK
-      </button>
+      </LoadingButton>
     </div>
   );
 }

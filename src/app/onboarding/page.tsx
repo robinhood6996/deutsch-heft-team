@@ -1,21 +1,19 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 export default function Onboarding() {
-  const router = useRouter();
+  const router = useAppRouter();
   const [code, setCode] = useState("");
   const [team, setTeam] = useState("");
   const [err, setErr] = useState("");
-  const [busy, setBusy] = useState(false);
 
   async function run(fn: "join_team" | "create_team") {
-    setBusy(true);
     setErr("");
     const sb = supabaseBrowser();
     const { error } = fn === "join_team" ? await sb.rpc("join_team", { p_code: code }) : await sb.rpc("create_team", { p_name: team });
-    setBusy(false);
     if (error) setErr(error.message);
     else router.replace("/");
   }
@@ -31,17 +29,17 @@ export default function Onboarding() {
           <span className="label">Invite code</span>
           <input id="code" className="input font-display text-2xl tracking-[0.3em] uppercase" maxLength={6} value={code} onChange={(e) => setCode(e.target.value)} />
         </label>
-        <button className="btn" disabled={busy || code.length < 6} onClick={() => run("join_team")}>
+        <LoadingButton className="btn" disabled={code.length < 6} loading={router.pending} loadingText="Joining …" onClick={() => run("join_team")}>
           Join team · যোগ দিন
-        </button>
+        </LoadingButton>
       </div>
       <details className="card">
         <summary className="cursor-pointer font-bold">I am the team leader: create a new team</summary>
         <div className="mt-3 flex flex-col gap-3">
           <input id="team" className="input" placeholder="Team name, e.g. Deutsch Gruppe Dhaka" value={team} onChange={(e) => setTeam(e.target.value)} />
-          <button className="btn-ghost" disabled={busy || team.trim().length < 2} onClick={() => run("create_team")}>
+          <LoadingButton className="btn-ghost" disabled={team.trim().length < 2} loading={router.pending} loadingText="Creating …" onClick={() => run("create_team")}>
             Create team
-          </button>
+          </LoadingButton>
         </div>
       </details>
       {err && <p className="text-sm text-red">{err}</p>}

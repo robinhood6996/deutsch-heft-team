@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { LoadingButton } from "@/components/LoadingButton";
 
 const EXAMPLE = `{
   "chapters": [{ "id": "k3", "kind": "vocab", "title": "Kapitel 3", "subtitle": "Vocabulary Project", "bn_title": "অধ্যায় ৩", "sort": 4 }],
@@ -41,9 +42,9 @@ export function ImportForm() {
       />
       <textarea className="input min-h-72 font-mono text-xs" value={text} onChange={(e) => setText(e.target.value)} placeholder={EXAMPLE} />
       <div className="flex items-center gap-3">
-        <button className="btn" disabled={busy || !text.trim()} onClick={() => run(text)}>
-          {busy ? "…" : "Importieren"}
-        </button>
+        <LoadingButton className="btn" disabled={!text.trim()} loading={busy} loadingText="Importieren …" onClick={() => run(text)}>
+          Importieren
+        </LoadingButton>
         {msg && <span className="text-sm">{msg}</span>}
       </div>
     </div>

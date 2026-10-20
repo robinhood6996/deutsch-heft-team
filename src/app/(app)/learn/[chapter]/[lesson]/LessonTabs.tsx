@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Lesson, Sentence, Word } from "@/lib/types";
 import { byTopic } from "@/lib/german";
 import { Reader } from "@/components/Reader";
@@ -13,7 +14,7 @@ import { ArticleText, SpeakButton } from "@/components/ui";
 type Tab = "read" | "understand" | "words" | "notes" | "exercises" | "quiz" | "learn";
 
 export function LessonTabs({ lesson, sentences, words, known }: { lesson: Lesson; sentences: Sentence[]; words: Word[]; known: string[] }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [tab, setTab] = useState<Tab>("read");
   const [run, setRun] = useState(0);
   const knownSet = new Set(known);

@@ -1,11 +1,13 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 export function DeleteExam({ id, title }: { id: string; title: string }) {
-  const router = useRouter();
+  const router = useAppRouter();
   return (
-    <button
+    <LoadingButton
+      loading={router.pending}
       className="btn-ghost px-2 py-1 text-xs text-red"
       onClick={async () => {
         if (!confirm(`Delete “${title}” and all its results?`)) return;
@@ -14,6 +16,6 @@ export function DeleteExam({ id, title }: { id: string; title: string }) {
       }}
     >
       Löschen
-    </button>
+    </LoadingButton>
   );
 }

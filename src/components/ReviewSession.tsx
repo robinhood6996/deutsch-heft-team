@@ -5,6 +5,8 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 import { speak } from "@/lib/speech";
 import { ArticleText, Progress, SpeakButton, articleFrame } from "./ui";
 import { WordVisual } from "./WordVisual";
+import { LoadingButton } from "./LoadingButton";
+import { Spinner } from "./Spinner";
 
 const GRADES = [
   { g: 0, label: "Nochmal", bn: "ভুলে গেছি", cls: "bg-red-soft border-red text-red" },
@@ -17,13 +19,13 @@ const GRADES = [
  * Spaced-repetition review. Each card: see the German, try to recall the meaning,
  * reveal, then grade yourself. "Nochmal" cards come back once more at the end.
  */
-export function ReviewSession({ words, onDone }: { words: Word[]; onDone: (stats: { reviewed: number; correct: number }) => void }) {
+export function ReviewSession({ words, onDone }: { words: Word[]; onDone: (stats: { reviewed: number; correct: number }) => void | Promise<void> }) {
   const [queue, setQueue] = useState<Word[]>(words);
   const [shown, setShown] = useState(false);
   const [reviewed, setReviewed] = useState(0);
   const [correct, setCorrect] = useState(0);
   const [requeued, setRequeued] = useState<Set<string>>(new Set());
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState<number | null>(null);
   const total = useMemo(() => words.length, [words]);
   const card = queue[0];
 
@@ -33,7 +35,7 @@ export function ReviewSession({ words, onDone }: { words: Word[]; onDone: (stats
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!card || busy) return;
+      if (!card || busy !== null) return;
       if (!shown && (e.code === "Space" || e.key === "Enter")) {
         e.preventDefault();
         setShown(true);
@@ -50,17 +52,17 @@ export function ReviewSession({ words, onDone }: { words: Word[]; onDone: (stats
         <p className="mt-2">
           {reviewed} cards reviewed · {correct} remembered
         </p>
-        <button className="btn mt-4" onClick={() => onDone({ reviewed, correct })}>
+        <LoadingButton className="btn mt-4" loadingText="Speichern …" onClick={() => onDone({ reviewed, correct })}>
           Weiter →
-        </button>
+        </LoadingButton>
       </div>
     );
   }
 
   async function grade(g: number) {
-    setBusy(true);
+    setBusy(g);
     await supabaseBrowser().rpc("review_word", { p_word: card.id, p_grade: g });
-    setBusy(false);
+    setBusy(null);
     setReviewed((n) => n + 1);
     if (g > 0) setCorrect((n) => n + 1);
     setShown(false);
@@ -104,8 +106,17 @@ export function ReviewSession({ words, onDone }: { words: Word[]; onDone: (stats
       {shown ? (
         <div className="mt-3 grid grid-cols-4 gap-2">
           {GRADES.map((x) => (
-            <button key={x.g} disabled={busy} onClick={() => grade(x.g)} className={`rounded-xl border-2 px-2 py-2 font-bold ${x.cls}`}>
-              {x.label}
+            <button
+              key={x.g}
+              disabled={busy !== null}
+              aria-busy={busy === x.g || undefined}
+              onClick={() => grade(x.g)}
+              className={`rounded-xl border-2 px-2 py-2 font-bold ${x.cls} ${busy !== null && busy !== x.g ? "opacity-50" : ""}`}
+            >
+              <span className="inline-flex items-center gap-1">
+                {busy === x.g && <Spinner className="h-3.5 w-3.5" />}
+                {x.label}
+              </span>
               <span className="bn block text-xs font-normal">{x.bn}</span>
             </button>
           ))}

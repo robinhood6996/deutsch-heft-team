@@ -5,6 +5,7 @@ import type { Exam, ExamAttempt, ExamQuestion } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { speak } from "@/lib/speech";
 import { ArticleText } from "@/components/ui";
+import { LoadingButton } from "@/components/LoadingButton";
 
 type Result = { score: number; total: number; pct?: number; auto?: boolean };
 type Phase = "intro" | "running" | "done";
@@ -271,15 +272,15 @@ export function ExamRunner({ exam, existing }: { exam: Exam; existing: { id: str
           {camera ? (
             <video ref={video} autoPlay muted playsInline className="mt-2 h-24 w-32 rounded-lg object-cover" />
           ) : (
-            <button className="btn-ghost mt-2 text-sm" onClick={enableCamera}>
+            <LoadingButton className="btn-ghost mt-2 text-sm" loadingText="Kamera startet …" onClick={enableCamera}>
               Kamera einschalten
-            </button>
+            </LoadingButton>
           )}
         </div>
         {error && <p className="rounded-lg bg-red-soft px-3 py-2 text-sm text-red">{error}</p>}
-        <button className="btn-gold text-lg" disabled={busy} onClick={start}>
-          {busy ? "…" : existing ? "Prüfung fortsetzen →" : "Prüfung starten →"}
-        </button>
+        <LoadingButton className="btn-gold text-lg" loading={busy} loadingText="Prüfung wird vorbereitet …" onClick={start}>
+          {existing ? "Prüfung fortsetzen →" : "Prüfung starten →"}
+        </LoadingButton>
       </div>
     );
   }
@@ -401,9 +402,15 @@ export function ExamRunner({ exam, existing }: { exam: Exam; existing: { id: str
             )}
 
             {error && <p className="mt-2 text-sm text-red">{error}</p>}
-            <button className="btn mt-4 w-full text-lg" disabled={!choice.trim() || busy} onClick={submitAnswer}>
+            <LoadingButton
+              className="btn mt-4 w-full text-lg"
+              disabled={!choice.trim()}
+              loading={busy}
+              loadingText={index + 1 === attempt!.total ? "Wird abgegeben …" : "Speichern …"}
+              onClick={submitAnswer}
+            >
               {index + 1 === attempt!.total ? "Abgeben ✓" : "Antwort speichern →"}
-            </button>
+            </LoadingButton>
             <p className="mt-1 text-center text-xs text-muted">Answers are final. · উত্তর দিলে আর বদলানো যাবে না।</p>
           </div>
         )}

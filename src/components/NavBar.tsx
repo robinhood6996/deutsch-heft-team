@@ -1,5 +1,12 @@
 "use client";
-import Link from "next/link";
+import Link, { useLinkStatus } from "next/link";
+import { Spinner } from "./Spinner";
+
+/** Small spinner inside a nav link while that page is loading. */
+function Pending({ children }: { children: React.ReactNode }) {
+  const { pending } = useLinkStatus();
+  return pending ? <Spinner className="h-[1.1em] w-[1.1em]" /> : <>{children}</>;
+}
 import { usePathname } from "next/navigation";
 
 type Item = { href: string; label: string; bn: string; icon: string };
@@ -36,8 +43,9 @@ export function NavBar({ isLeader, xpWeek, streak }: { isLeader: boolean; xpWeek
               <Link
                 key={i.href}
                 href={i.href}
-                className={`rounded-lg px-2.5 py-1.5 text-sm font-bold ${active(i.href) ? "bg-blue-soft text-blue" : "text-muted hover:text-ink"}`}
+                className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-bold ${active(i.href) ? "bg-blue-soft text-blue" : "text-muted hover:text-ink"}`}
               >
+                <Pending>{null}</Pending>
                 {i.label}
               </Link>
             ))}
@@ -62,7 +70,9 @@ export function NavBar({ isLeader, xpWeek, streak }: { isLeader: boolean; xpWeek
       >
         {mobile.map((i) => (
           <Link key={i.href} href={i.href} className={`flex flex-col items-center py-2 text-[11px] font-bold ${active(i.href) ? "text-blue" : "text-muted"}`}>
-            <span className="text-lg leading-none">{i.icon}</span>
+            <span className="grid h-6 place-items-center text-lg leading-none">
+              <Pending>{i.icon}</Pending>
+            </span>
             {i.label}
           </Link>
         ))}

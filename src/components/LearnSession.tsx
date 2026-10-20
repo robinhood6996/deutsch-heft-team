@@ -6,6 +6,7 @@ import { shuffle } from "@/lib/german";
 import { speak } from "@/lib/speech";
 import { ArticleText, Progress, SpeakButton, articleFrame, cheer } from "./ui";
 import { WordVisual } from "./WordVisual";
+import { LoadingButton } from "./LoadingButton";
 
 type Step = { type: "show"; word: Word } | { type: "check"; word: Word; options: Word[] };
 
@@ -14,7 +15,7 @@ type Step = { type: "show"; word: Word } | { type: "check"; word: Word; options:
  * memory trick), with a quick recall check after every few words.
  * Words are saved into the review schedule at the end.
  */
-export function LearnSession({ words, pool, onDone }: { words: Word[]; pool: Word[]; onDone: (n: number) => void }) {
+export function LearnSession({ words, pool, onDone }: { words: Word[]; pool: Word[]; onDone: (n: number) => void | Promise<void> }) {
   const [steps] = useState<Step[]>(() => {
     const out: Step[] = [];
     const batch: Word[] = [];
@@ -33,7 +34,6 @@ export function LearnSession({ words, pool, onDone }: { words: Word[]; pool: Wor
   });
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
   const step = steps[i];
 
   useEffect(() => {
@@ -42,10 +42,8 @@ export function LearnSession({ words, pool, onDone }: { words: Word[]; pool: Wor
   }, [i, step]);
 
   async function finish() {
-    setSaving(true);
     await supabaseBrowser().rpc("learn_words", { p_words: words.map((w) => w.id) });
-    setSaving(false);
-    onDone(words.length);
+    await onDone(words.length);
   }
 
   if (!step) {
@@ -54,9 +52,9 @@ export function LearnSession({ words, pool, onDone }: { words: Word[]; pool: Wor
         <p className="hand text-5xl text-green">{cheer()}</p>
         <p className="mt-2">{words.length} new words added to your review schedule. You will see them again tomorrow.</p>
         <p className="bn text-muted">নতুন শব্দগুলো কাল আবার রিভিশনে আসবে।</p>
-        <button className="btn mt-4" disabled={saving} onClick={finish}>
-          {saving ? "…" : "Speichern & weiter →"}
-        </button>
+        <LoadingButton className="btn mt-4" loadingText="Speichern …" onClick={finish}>
+          Speichern & weiter →
+        </LoadingButton>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { NavProgress } from "@/components/NavProgress";
 
 export const metadata: Metadata = {
   title: "Deutsch-Heft Team",
@@ -26,7 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@600;700&family=Hind+Siliguri:wght@400;500;600&display=swap"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <NavProgress />
+        {children}
+      </body>
     </html>
   );
 }

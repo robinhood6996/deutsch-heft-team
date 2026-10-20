@@ -5,6 +5,7 @@ import { isCorrect, makeQuiz, type QuizQuestion } from "@/lib/german";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { speak } from "@/lib/speech";
 import { ArticleText, Progress, SpeakButton, cheer } from "./ui";
+import { LoadingButton } from "./LoadingButton";
 
 const LABEL: Record<QuizQuestion["kind"], string> = {
   de2en: "What does it mean? · মানে কী?",
@@ -26,7 +27,7 @@ export function QuizSession({
   size: number;
   passPct?: number;
   context: string;
-  onFinish: (pct: number) => void;
+  onFinish: (pct: number) => void | Promise<void>;
 }) {
   const [round, setRound] = useState(0);
   const questions = useMemo(() => makeQuiz(targets, pool, size), [targets, pool, size, round]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -64,9 +65,9 @@ export function QuizSession({
     return (
       <div className="card text-center">
         <p>No words to quiz yet.</p>
-        <button className="btn mt-3" onClick={() => onFinish(100)}>
+        <LoadingButton className="btn mt-3" onClick={() => onFinish(100)}>
           Weiter →
-        </button>
+        </LoadingButton>
       </div>
     );
   }
@@ -94,9 +95,9 @@ export function QuizSession({
               Neue Runde
             </button>
           )}
-          <button className="btn" onClick={() => onFinish(pct)}>
+          <LoadingButton className="btn" loadingText="Speichern …" onClick={() => onFinish(pct)}>
             {passed ? "Weiter →" : "Später"}
-          </button>
+          </LoadingButton>
         </div>
       </div>
     );
@@ -175,9 +176,9 @@ export function QuizSession({
             <span className="text-sm text-muted">
               <ArticleText de={q.word.de} /> = {q.word.en} · <span className="bn">{q.word.bn}</span>
             </span>
-            <button className="btn ml-auto" onClick={next} autoFocus>
+            <LoadingButton className="btn ml-auto" onClick={next} autoFocus loadingText={i + 1 === questions.length ? "Auswerten …" : undefined}>
               Weiter →
-            </button>
+            </LoadingButton>
           </div>
         )}
       </div>

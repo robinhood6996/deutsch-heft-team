@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 const EMOJIS = ["🙂", "😎", "🦊", "🐼", "🐯", "🦁", "🐸", "🦉", "🐝", "🌻", "🚀", "⚽", "🎧", "📚", "🍵", "🥨"];
 
 export function ProfileForm({ id, name, emoji }: { id: string; name: string; emoji: string }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [n, setN] = useState(name);
   const [e, setE] = useState(emoji);
   const [msg, setMsg] = useState("");
@@ -25,8 +26,10 @@ export function ProfileForm({ id, name, emoji }: { id: string; name: string; emo
         ))}
       </div>
       <div className="flex items-center gap-3">
-        <button
+        <LoadingButton
           className="btn"
+          loading={router.pending}
+          loadingText="Speichern …"
           onClick={async () => {
             const { error } = await supabaseBrowser().from("profiles").update({ display_name: n.trim(), avatar_emoji: e }).eq("id", id);
             setMsg(error ? "❌ " + error.message : "✅ Saved");
@@ -34,7 +37,7 @@ export function ProfileForm({ id, name, emoji }: { id: string; name: string; emo
           }}
         >
           Speichern
-        </button>
+        </LoadingButton>
         {msg && <span className="text-sm">{msg}</span>}
       </div>
     </div>

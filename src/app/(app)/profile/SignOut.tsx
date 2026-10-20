@@ -1,11 +1,14 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 export function SignOut() {
-  const router = useRouter();
+  const router = useAppRouter();
   return (
-    <button
+    <LoadingButton
+      loading={router.pending}
+      loadingText="Abmelden …"
       className="btn-ghost text-red"
       onClick={async () => {
         await supabaseBrowser().auth.signOut();
@@ -13,6 +16,6 @@ export function SignOut() {
       }}
     >
       Abmelden · সাইন আউট
-    </button>
+    </LoadingButton>
   );
 }

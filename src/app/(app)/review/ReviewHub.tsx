@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Word } from "@/lib/types";
 import { ReviewSession } from "@/components/ReviewSession";
 import { QuizSession } from "@/components/QuizSession";
@@ -9,7 +10,7 @@ import { QuizSession } from "@/components/QuizSession";
 type Mode = null | "due" | "quiz" | "weak";
 
 export function ReviewHub({ due, learned, weak }: { due: Word[]; learned: Word[]; weak: Word[] }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [mode, setMode] = useState<Mode>(null);
   const [key, setKey] = useState(0);
   const back = () => {

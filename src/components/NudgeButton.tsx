@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { LoadingButton } from "./LoadingButton";
 
 const PRESETS = [
   "Los geht's! 💪 চলো, আজকের মিশনটা করে ফেলো!",
@@ -40,9 +41,9 @@ export function NudgeButton({ to, name, already }: { to: string; name: string; a
           </div>
           <input className="input mt-2 text-sm" maxLength={140} value={msg} onChange={(e) => setMsg(e.target.value)} />
           {err && <p className="mt-1 text-sm text-red">{err}</p>}
-          <button className="btn mt-2 w-full py-1.5" onClick={send}>
+          <LoadingButton className="btn mt-2 w-full py-1.5" loadingText="Senden …" onClick={send}>
             Senden
-          </button>
+          </LoadingButton>
           <p className="mt-1 text-xs text-muted">If they finish within an hour, you both get +10 XP.</p>
         </div>
       )}

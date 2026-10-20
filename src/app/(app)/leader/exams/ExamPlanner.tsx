@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Chapter, Lesson } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
@@ -19,7 +20,7 @@ const nowDhakaLocal = () => {
 };
 
 export function ExamPlanner({ teamId, chapters, lessons }: { teamId: string; chapters: Chapter[]; lessons: Lesson[] }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [title, setTitle] = useState("Wochentest");
   const [scopeChapters, setScopeChapters] = useState<string[]>([]);
   const [scopeLessons, setScopeLessons] = useState<string[]>([]);
@@ -33,7 +34,7 @@ export function ExamPlanner({ teamId, chapters, lessons }: { teamId: string; cha
   const [every, setEvery] = useState(0); // 0 = once, 3 = every 3 days, 7 = weekly
   const [times, setTimes] = useState(4);
   const [msg, setMsg] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [, setBusy] = useState(false);
 
   const toggle = (list: string[], set: (v: string[]) => void, id: string) => set(list.includes(id) ? list.filter((x) => x !== id) : [...list, id]);
 
@@ -164,12 +165,12 @@ export function ExamPlanner({ teamId, chapters, lessons }: { teamId: string; cha
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        <button className="btn" disabled={busy} onClick={() => create(false)}>
+        <LoadingButton className="btn" loadingText="Speichern …" onClick={() => create(false)}>
           Planen
-        </button>
-        <button className="btn-gold" disabled={busy} onClick={() => create(true)}>
+        </LoadingButton>
+        <LoadingButton className="btn-gold" loadingText="Startet …" onClick={() => create(true)}>
           ⚡ Jetzt starten
-        </button>
+        </LoadingButton>
         {msg && <span className="text-sm">{msg}</span>}
       </div>
       <p className="text-xs text-muted">

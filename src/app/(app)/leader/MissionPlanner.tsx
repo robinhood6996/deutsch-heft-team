@@ -1,6 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import type { Chapter, Lesson, Mission } from "@/lib/types";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
@@ -15,7 +16,7 @@ const addDays = (d: string, n: number) => {
  * each day the mission takes the next unlearned words from it.
  */
 export function MissionPlanner({ chapters, lessons, missions, teamId, today }: { chapters: Chapter[]; lessons: Lesson[]; missions: Mission[]; teamId: string; today: string }) {
-  const router = useRouter();
+  const router = useAppRouter();
   const [day, setDay] = useState(today);
   const [repeat, setRepeat] = useState(1);
   const [lessonId, setLessonId] = useState<string>(missions.find((m) => m.day === today)?.lesson_id ?? "");
@@ -118,9 +119,9 @@ export function MissionPlanner({ chapters, lessons, missions, teamId, today }: {
             <input className="input" maxLength={200} value={note} onChange={(e) => setNote(e.target.value)} placeholder="z. B. Heute: Berufe! Lest den Text zweimal laut." />
           </label>
           <div className="flex items-center gap-3 sm:col-span-2">
-            <button className="btn" disabled={busy} onClick={save}>
-              {busy ? "…" : "Speichern"}
-            </button>
+            <LoadingButton className="btn" loading={busy || router.pending} loadingText="Speichern …" onClick={save}>
+              Speichern
+            </LoadingButton>
             {msg && <span className="text-sm">{msg}</span>}
           </div>
         </div>

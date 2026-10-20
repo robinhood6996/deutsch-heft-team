@@ -1,10 +1,12 @@
 "use client";
 import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useAppRouter } from "@/lib/progress";
+import { LoadingButton } from "@/components/LoadingButton";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 function LoginForm() {
-  const router = useRouter();
+  const router = useAppRouter();
   const params = useSearchParams();
   const next = params.get("next") || "/";
   const [mode, setMode] = useState<"signin" | "signup">("signin");
@@ -22,7 +24,7 @@ function LoginForm() {
     if (mode === "signin") {
       const { error } = await sb.auth.signInWithPassword({ email, password });
       if (error) setMsg({ ok: false, text: error.message });
-      else router.replace(next);
+      else return router.replace(next); // keep the spinner until the next page shows
     } else {
       const { data, error } = await sb.auth.signUp({
         email,
@@ -33,7 +35,7 @@ function LoginForm() {
         },
       });
       if (error) setMsg({ ok: false, text: error.message });
-      else if (data.session) router.replace("/onboarding");
+      else if (data.session) return router.replace("/onboarding");
       else setMsg({ ok: true, text: "Check your email and tap the confirmation link. · ইমেইলে পাঠানো লিংকে চাপ দিন।" });
     }
     setBusy(false);
@@ -84,9 +86,9 @@ function LoginForm() {
             autoComplete={mode === "signin" ? "current-password" : "new-password"}
           />
         </label>
-        <button className="btn mt-1" disabled={busy}>
-          {busy ? "…" : mode === "signin" ? "Sign in" : "Create account"}
-        </button>
+        <LoadingButton type="submit" className="btn mt-1" loading={busy || router.pending} loadingText={mode === "signin" ? "Signing in …" : "Creating account …"}>
+          {mode === "signin" ? "Sign in" : "Create account"}
+        </LoadingButton>
         {msg && <p className={`text-sm ${msg.ok ? "text-green" : "text-red"}`}>{msg.text}</p>}
       </form>
     </main>
